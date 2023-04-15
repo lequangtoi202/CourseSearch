@@ -1,0 +1,143 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="index::head">
+</head>
+
+<body>
+    <!-- ? Preloader Start -->
+    <div th:replace="index::preloader">
+
+    </div>
+    <!-- Preloader Start -->
+    <!-- Header Start -->
+    <header th:replace="index::header"></header>
+    <!-- Header End -->
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">My Account</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Account</a></li>
+                                        </ol>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <section class="container mt-5 mb-5">
+            <div class="text alert-success text-center alert" th:if="${update_acc_success}">
+                <p th:text="${update_acc_success}"></p>
+            </div>
+            <div class="text alert-danger text-center alert" th:if="${password}">
+                <p th:text="${password}"></p>
+            </div>
+            <div class="text text-center">
+                <h3>User information</h3>
+            </div>
+            <form th:action="@{/update-info}" method="POST" th:object="${user}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="username">Username</label>
+                        <input type="text" style="font-size: 1.5rem" class="form-control single-input" name="username" th:field="*{username}" id="username">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="password">Password</label>
+                        <input type="password" style="font-size: 1.5rem" class="form-control single-input" id="password" name="password" >
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="repeatPassword">Confirm password</label>
+                        <input type="password" style="font-size: 1.5rem;" class="form-control single-input" id="repeatPassword" name="repeatPassword">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </section>
+        <section class="container mt-5 mb-5">
+            <div class="text alert-success text-center alert" th:if="${success}">
+                <p th:text="${success}"></p>
+            </div>
+            <div class="text alert-success text-center alert" th:if="${update_success}">
+                <p th:text="${update_success}"></p>
+            </div>
+            <div class="text alert-danger text-center alert" th:if="${failed}">
+                <p th:text="${failed}"></p>
+            </div>
+            <div class="text alert-danger text-center alert" th:if="${update_failed}">
+                <p th:text="${update_failed}"></p>
+            </div>
+            <div class="text text-center">
+                <h3>Customer information</h3>
+            </div>
+            <form th:action="@{/update-customer}" method="POST" th:object="${customer}">
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="fullName">Full name</label>
+                        <input type="text" class="form-control single-input" style="font-size: 1.5rem" name="fullName" th:field="*{fullName}" id="fullName" placeholder="Full name">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="dateOfBirth">Date of birth</label>
+                        <input type="date" style="font-size: 1.5rem" class="form-control single-input" id="dateOfBirth" th:field="*{dateOfBirth}" name="dateOfBirth">
+                    </div>
+                </div>
+                <fieldset class="form-group">
+                    <div class="row">
+                        <legend class="col-form-label col-sm-2 pt-0">Gender</legend>
+                        <div class="col-sm-10">
+                            <div class="form-check">
+                                <input class="form-check-input confirm-radio" type="radio" th:checked="${customer.gender}" name="gender" id="male" th:value="true">
+                                <label class="form-check-label" for="male">
+                                    Male
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input primary-radio" type="radio" th:checked="${!customer.gender}" name="gender" id="female" th:value="false">
+                                <label class="form-check-label" for="female">
+                                    Female
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <input type="text" style="font-size: 1.5rem" class="form-control single-input" id="address" th:field="*{address}" name="address" placeholder="1234 Main St">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" style="font-size: 1.5rem" class="form-control single-input" id="email" name="email" th:field="*{email}" placeholder="toiquangle@gmail.com">
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" style="font-size: 1.5rem" class="form-control single-input" th:field="*{phone}" name="phone" id="phone" >
+                </div>
+                <button type="submit" class="btn btn-primary">Save</button>
+            </form>
+        </section>
+    </main>
+    <footer th:replace="index::footer">
+    </footer>
+  <!-- Scroll Up -->
+  <div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+<div th:replace="index::script"></div>
+</body>
+</html>

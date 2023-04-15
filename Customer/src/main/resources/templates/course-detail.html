@@ -1,0 +1,90 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="index::head">
+</head>
+
+<body>
+    <!-- ? Preloader Start -->
+    <div th:replace="index::preloader">
+
+    </div>
+    <!-- Preloader Start -->
+    <!-- Header Start -->
+    <header th:replace="index::header"></header>
+    <!-- Header End -->
+    <main>
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Course Detail</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Course detail</a></li>
+                                        </ol>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <div class="services-area services-area2 section-padding40">
+            <div class="container">
+                <div class="row">
+                    <div class="col-xl-5 col-lg-5 col-md-6">
+                        <div id="carousel-example-1" class="single-product-slider carousel slide" data-ride="carousel">
+                            <div class="carousel-inner" role="listbox">
+                                <div class="carousel-item active"> <img class="d-block w-100" th:src="@{'data:image/jpeg;base64,' + ${course.image}}" alt="First slide"> </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-7 col-lg-7 col-md-6">
+                        <div class="single-product-details">
+                            <h1 th:text="${course.name}"></h1>
+                            <div class="price mb-3">
+                                <th:block th:if="${course.price == 0}">
+                                    <span>Free</span>
+                                </th:block>
+                                <th:block th:if="${course.price != 0}">
+                                    <span th:text="'$' + ${course.price}"></span>
+                                </th:block>
+                            </div>
+                            <h2>Description:</h2>
+                            <p th:text="${course.description}"></p>
+                            <h2>Mentor:</h2>
+                            <p th:text="${course.teacherName}"></p>
+                            <th:block th:if="${course.startDate != null && course.endDate != null}">
+                                <p th:text="${course.startDate} + ' to ' + ${course.endDate}"></p>
+                            </th:block>
+                            <div class="price-box-bar">
+                                <div class="cart-and-bay-btn">
+                                    <a class="border-btn border-btn2" data-fancybox-close="" th:href="${course.linkCourse}">View course</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <!-- Services End -->
+    </main>
+    <footer th:replace="index::footer">
+    </footer>
+  <!-- Scroll Up -->
+  <div id="back-top" >
+    <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+</div>
+<div th:replace="index::script"></div>
+</body>
+</html>

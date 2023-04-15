@@ -1,0 +1,20 @@
+
+.properties__caption p {
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis;
+}
+.topic-img > img {
+    border-radius: 12px;
+}
+.properties__img > a > img {
+    width: 100%;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+}
+.price.mb-3 {
+    cursor: pointer;
+    font-weight: 700;
+    color: #4255A4;
+    font-size: 23px;
+}

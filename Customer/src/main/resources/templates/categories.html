@@ -1,0 +1,98 @@
+<!doctype html>
+<html class="no-js" lang="zxx" xmlns:th="https://www.thymeleaf.org/">
+<head th:replace="index::head">
+</head>
+
+<body>
+    <!-- ? Preloader Start -->
+    <div th:replace="index::preloader">
+    </div>
+    <!-- Preloader Start -->
+    <!-- Header Start -->
+    <header th:replace="index::header"></header>
+    <!-- Header End -->
+    <main>
+
+        <!--? slider Area Start-->
+        <section class="slider-area slider-area2">
+            <div class="slider-active">
+                <!-- Single Slider -->
+                <div class="single-slider slider-height2">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-xl-8 col-lg-11 col-md-12">
+                                <div class="hero__caption hero__caption2">
+                                    <h1 data-animation="bounceIn" data-delay="0.2s">Our categories</h1>
+                                    <!-- breadcrumb Start-->
+                                    <nav aria-label="breadcrumb">
+                                        <ol class="breadcrumb">
+                                            <li class="breadcrumb-item"><a th:href="@{/}">Home</a></li>
+                                            <li class="breadcrumb-item"><a href="#">Category</a></li>
+                                        </ol>
+                                    </nav>
+                                    <!-- breadcrumb End -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>          
+                </div>
+            </div>
+        </section>
+        <section class="mt-5">
+            <form th:action="@{/categories}" method="GET">
+                <div class="input-group" style="justify-content: center">
+                    <div class="form-outline">
+                        <input type="search" style="height: 50px;border: solid 1px;width: 191px;font-size: 16px;"
+                               id="form1" name="q"
+                               placeholder="keyword..." class="form-control" />
+                    </div>
+                    <input type="submit" value="Search" class= "ml-3 btn btn-primary"/>
+
+                </div>
+            </form>
+        </section>
+        <!-- Courses area start -->
+        <div class="topic-area section-padding40">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <div class="section-tittle text-center mb-55">
+                            <h2>Explore ours subjects</h2>
+                        </div>
+                    </div>
+                </div>
+                <th:block th:if="${categories.size() == 0}">
+                    <div class="text-center">No category in this time</div>
+                </th:block>
+                <th:block th:if="${categories.size() != 0}">
+                    <div class="row">
+                        <div class="col-lg-3 col-md-4 col-sm-6"  th:each="c : ${categories}">
+                            <div class="single-topic text-center mb-30">
+                                <div class="topic-img">
+                                    <img th:src="@{'data:image/jpeg;base64,' + ${c.image}}" alt="">
+                                    <div class="topic-content-box">
+                                        <div class="topic-content">
+                                            <h3><a th:href="@{/category/{id}(id=${c.id})}" th:text="${c.name}"></a></h3>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+        <!-- top subjects End -->
+    </main>
+    <footer th:replace="index::footer">
+    </footer>
+      <!-- Scroll Up -->
+    <div id="back-top" >
+        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
+    </div>
+
+    <!-- JS here -->
+    <div th:replace="index::script"></div>
+    
+</body>
+</html>

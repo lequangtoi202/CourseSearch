@@ -1,0 +1,10 @@
+.table th,
+.table td {
+    padding: 0.75rem;
+    vertical-align: top;
+    border-top: 1px solid #e3e6f0;
+    white-space: nowrap !important; /* Ngăn chặn xuống dòng */
+    overflow: hidden !important; /* Ẩn phần văn bản dư thừa */
+    text-overflow: ellipsis !important; /* Thay thế phần văn bản dư thừa bằng ba chấm */
+    max-width: 250px !important; /* Số ký tự tối đa bạn muốn hiển thị */
+}

@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org/">
+
+<head th:replace="fragments :: header">
+
+</head>
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul th:replace="fragments :: sidebar">
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav th:replace="fragments :: topbar"></nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid" style="overflow-x: scroll">
+
+                    <div>
+                        <form th:action="@{/courses}" method="GET">
+                            <input type="text" id="search" name="kw" placeholder="Search courses">
+                            <button type="submit" class="btn btn-primary">Search</button>
+                        </form>
+                    </div>
+
+
+                    <div th:if="${size == 0}">
+                        <p>No course in system</p>
+                    </div>
+
+                    <div th:if="${success}" class="text-center alert alert-success" >
+                        <p th:text="${success}"></p>
+                    </div>
+                    <div th:if="${failed}" class="text-center alert alert-danger" >
+                        <p th:text="${failed}"></p>
+                    </div>
+                    <a class="btn btn-primary" th:href="@{/add-course}" >Add new course</a>
+                    <div th:text="${size} + ' courses'" class="mt-4"></div>
+                    <table class="table mt-1 table-bordered" th:if="${size > 0}">
+                        <thead>
+                        <tr>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Image</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Start Date</th>
+                            <th scope="col">End Date</th>
+                            <th scope="col">Link Course</th>
+                            <th scope="col">Category</th>
+                            <th scope="col">Mentor</th>
+                            <th scope="col">Created At</th>
+                            <th scope="col">Updated At</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:each="c : ${courses}">
+                                <th scope="row" th:text="${c.name}"></th>
+                                <td th:text="${c.description}"></td>
+                                <td>
+                                    <img src="" style="height: 100px; width: 120px;" th:src="*{'data:image/jpeg;base64,' + {c.image}}">
+                                </td>
+                                <td th:text="${c.price}"></td>
+                                <td th:text="${c.startDate}"></td>
+                                <td th:text="${c.endDate}"></td>
+                                <td th:text="${c.linkCourse}"></td>
+                                <td th:text="${c.category.name}"></td>
+                                <td th:text="${c.teacherName}"></td>
+                                <td th:text="${c.created_at}"></td>
+                                <td th:text="${c.updated_at}"></td>
+                                <td>
+                                    <a th:href="@{/update-course/{id}(id = ${c.id})}" class="btn btn-primary">Update</a>
+                                    <a th:href="@{/delete-course/{id} (id = ${c.id})}" class="btn btn-danger">X</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!--<nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li th:if="${currentPage != 0}" class="page-item">
+                                <a th:href="@{'/products/' + ${currentPage - 1}}" class="page-link" href="#">Previous</a>
+                            </li>
+                            <li th:each="i : ${#numbers.sequence(1, totalPages)}" th:classappend="${currentPage == i - 1 ? 'active' : ''}" class="page-item">
+                                <a th:href="@{'/products/' + ${i - 1}}" class="page-link" href="#"><span th:text="${i}"></span></a>
+                            </li>
+                            <li th:if="${currentPage + 1 != totalPages}"  class="page-item">
+                                <a th:href="@{'/products/' + ${currentPage + 1}}" class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>-->
+                </div>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer th:replace="fragments :: footer">
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a th:replace="fragments :: scroll"></a>
+
+    <!-- Logout Modal-->
+    <div th:replace="fragments :: logoutModal"></div>
+
+
+
+    <!--end-->
+    <div th:replace="fragments :: script"></div>
+    <script th:src="@{/js/categories.js}"></script>
+
+</body>
+
+</html>
